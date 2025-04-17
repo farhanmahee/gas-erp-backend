@@ -1,20 +1,15 @@
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { AppDataSource } from './app.service';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3000);
+  app.useGlobalPipes(new ValidationPipe());
+  app.enableCors(); // Enable CORS if needed
+  await app.listen(3000);
 }
-
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Database connected successfully!');
-    bootstrap();
-  })
-  .catch((error) => console.error('Database connection failed:', error));
-
+bootstrap();
 // npx ts-node -r tsconfig-paths/register src/main.ts
 // npx ts-node -r tsconfig-paths/register src/main.ts --env=development
 // npx ts-node -r tsconfig-paths/register src/main.ts --env=production
