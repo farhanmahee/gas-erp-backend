@@ -124,5 +124,6 @@
     }
   ],
   "mssql.enableRichExperiences": true,
-  "mssql.connections": []
+  "mssql.connections": [],
+  "mssql.autoDisableNonTSqlLanguageService": true
 }
