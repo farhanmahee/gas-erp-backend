@@ -1,8 +1,8 @@
 {
-  "name": "gas-erp-backend",
+  "name": "mte-gas-erp-backend",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Backend API service for MTE Gas ERP system",
+  "author": "admin",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
