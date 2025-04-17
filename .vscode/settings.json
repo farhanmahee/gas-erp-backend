@@ -78,7 +78,7 @@
   "editor.formatOnSaveTimeout": 2000,
   "editor.formatOnTypeTimeout": 2000,
   "editor.formatOnPasteTimeout": 2000,
-  "css.styleSheets": [acceptPrimaryActions, "css"],
+  "css.styleSheets": ["**/*.css"],
   "css.validate": true,
   "css.lint": {
     "unknownProperties": "ignore"
