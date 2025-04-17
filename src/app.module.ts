@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductModule } from './product/product.module';
 import { StoreModule } from './store/store.module';
 import { AuthModule } from './auth/auth.module';
+import { StockModule } from './stock/stock.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
@@ -33,6 +34,7 @@ import { join } from 'path';
     ProductModule,
     StoreModule,
     AuthModule,
+    StockModule,
   ],
   controllers: [AppController],
   providers: [AppService],
