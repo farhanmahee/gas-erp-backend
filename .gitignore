@@ -1,7 +1,22 @@
-# compiled output
-/dist
+# Dependencies
 /node_modules
-/build
+/dist
+
+# Environment
+.env
+.env.*
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # Logs
 logs
@@ -12,35 +27,20 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# OS
-.DS_Store
-
 # Tests
 /coverage
 /.nyc_output
 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# OS
+.DS_Store
+Thumbs.db
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# Build
+/dist
+/build
 
-# dotenv environment variable files
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+# TypeScript
+*.tsbuildinfo
 
 # temp directory
 .temp
