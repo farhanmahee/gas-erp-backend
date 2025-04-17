@@ -1,9 +1,16 @@
+-- Drop database if exists
+DROP DATABASE IF EXISTS `gas_erp`;
+
 -- Create database
-CREATE DATABASE IF NOT EXISTS `gas_erp`;
+CREATE DATABASE `gas_erp` 
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_unicode_ci;
+
+-- Use the database
 USE `gas_erp`;
 
--- Create tables
-CREATE TABLE IF NOT EXISTS `user` (
+-- Create Users table
+CREATE TABLE `user` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `email` VARCHAR(255) NOT NULL UNIQUE,
     `password` VARCHAR(255) NOT NULL,
@@ -12,7 +19,8 @@ CREATE TABLE IF NOT EXISTS `user` (
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS `product` (
+-- Create Products table
+CREATE TABLE `product` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `category` VARCHAR(50) NOT NULL,
