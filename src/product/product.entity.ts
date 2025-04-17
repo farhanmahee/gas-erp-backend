@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Store } from '../entity/Store';
 
 @Entity()
 export class Product {
@@ -16,4 +17,7 @@ export class Product {
 
   @Column()
   warehouse_id: number; // ID of the warehouse where the product is stored
+
+  @ManyToOne(() => Store, (store) => store.products)
+  store: Store; // Relation to Store entity
 }

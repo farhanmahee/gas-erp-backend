@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { config } from 'dotenv';
 import { join } from 'path';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
+import { User } from './entity/User';
 
 @Injectable()
 export class AppService {
@@ -38,3 +42,27 @@ AppDataSource.initialize()
   .catch((err) => {
     console.error('Error during Data Source initialization:', err);
   });
+@Injectable()
+export class AuthService {
+  constructor(
+    private readonly jwtService: JwtService,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>
+  );
+  async validateUser(email: string, pass: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (user && bcrypt.compareSync(pass, user.password)) { return user; }
+    return null;
+  }
+
+  async validateUserById(id: number): Promise<User | null> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
+  async login(user: User) {
+    const payload = { email: user.email, sub: user.id, role: user.role };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
+}

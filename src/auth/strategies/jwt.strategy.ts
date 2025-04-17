@@ -1,23 +1,38 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { AuthService } from '../auth.service'; // Adjust the path if necessary
+import { Strategy, ExtractJwt, StrategyOptions } from 'passport-jwt';
+import { AuthService } from 'src/app.service';
+import { ConfigService } from '@nestjs/config';
+import { Request } from 'express';
+import { Any } from 'typeorm';
+interface JwtPayload extends Request {
+  sub: number;
+  email: string;
+  role: string;
+}
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService) {
-    super({
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+  constructor(
+    private authService: AuthService,
+    private configService: ConfigService,
+  ) {
+    const options: StrategyOptions = {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: 'your_secret_key', // Use environment variables in production
-    });
+      secretOrKey: configService.get<string>('JWT_SECRET', 'your_secret_key'),
+    };
+    super(options);
   }
 
-  async validate(payload: any) {
-    const user = await this.authService.validateUser(payload.email);
+  async validate(payload: JwtPayload) {
+    const user = await this.authService.validateUserById(payload.sub);
     if (!user) {
-      throw new Error('Unauthorized'); // Handle unauthorized access
+      throw new UnauthorizedException();
     }
-    return user; // Return the validated user
+    return user;
   }
 }

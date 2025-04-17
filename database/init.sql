@@ -38,16 +38,37 @@ CREATE TABLE `user` (
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Create Products table
+-- Create Stores table
+CREATE TABLE `stores` (
+    `store_id` INT PRIMARY KEY AUTO_INCREMENT,
+    `store_code` VARCHAR(50) NOT NULL UNIQUE,
+    `name` VARCHAR(255) NOT NULL,
+    `address` VARCHAR(255) NOT NULL,
+    `city` VARCHAR(100) NOT NULL,
+    `state` VARCHAR(100) NOT NULL,
+    `country` VARCHAR(100) NOT NULL,
+    `postal_code` VARCHAR(20) NOT NULL,
+    `phone` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(255),
+    `status` VARCHAR(20) DEFAULT 'active',
+    `total_sales` DECIMAL(10,2) DEFAULT 0.00,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create Products table with store relationship
 CREATE TABLE `product` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `category` VARCHAR(50) NOT NULL,
     `unit_price` DECIMAL(10,2) NOT NULL,
     `warehouse_id` INT NOT NULL,
+    `store_id` INT,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`store_id`) REFERENCES `stores`(`store_id`) ON DELETE SET NULL
 );
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
