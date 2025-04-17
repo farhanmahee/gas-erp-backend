@@ -23,5 +23,6 @@
     "**/node_modules": true,
     "**/dist": true
   },
-  "javascript.preferences.importModuleSpecifier": "relative"
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "terminal.integrated.cwd": "Cwd"
 }
