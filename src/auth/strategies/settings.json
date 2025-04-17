@@ -1,0 +1,128 @@
+{
+  "editor.fontSize": 12,
+  "editor.renderWhitespace": "all",
+  "editor.largeFileOptimizations": false,
+  "git.autofetch": true,
+  "workbench.iconTheme": "vscode-icons",
+  "debug.openDebug": "neverOpen",
+  "editor.tabCompletion": "on",
+  "powershell.integratedConsole.focusConsoleOnExecute": false,
+  "files.defaultLanguage": "powershell",
+  "workbench.colorTheme": "PowerShell ISE",
+  "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?",
+  "powershell.buttons.showPanelMovementButtons": true,
+  "powershell.codeFolding.showLastLine": false,
+  "powershell.sideBar.CommandExplorerVisibility": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "",
+    "editor.action.accessibilityHelp",
+    "editor.action.toggleTabFocusMode",
+    "notification.acceptPrimaryAction",
+    "notifications.hideList",
+    "notifications.hideToasts"
+  ],
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.codeActions.triggerOnFocusChange": true,
+  "window.autoDetectColorScheme": true,
+  "extensions.closeExtensionDetailsOnViewChange": true,
+  "terminal.integrated.accessibleViewFocusOnCommandExecution": true,
+  "terminal.integrated.accessibleViewPreserveCursorPosition": true,
+  "terminal.integrated.allowMnemonics": true,
+  "redhat.telemetry.enabled": true,
+  "workbench.editor.enablePreviewFromCodeNavigation": true,
+  "workbench.editor.enablePreviewFromQuickOpen": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.pinnedTabsOnSeparateRow": true,
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.alwaysShowEditorActions": true,
+  "workbench.editor.autoLockGroups": {
+    "default": true,
+    "workbench.editor.chatSession": true
+  },
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.excludeDirty": true,
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.preferHistoryBasedLanguageDetection": true,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editor.sharedViewState": true,
+  "workbench.editor.defaultBinaryEditor": "default",
+  "git.ignoreRebaseWarning": true,
+  "explorer.openEditors.minVisible": 10,
+  "workbench.settings.applyToAllProfiles": [
+    "explorer.openEditors.minVisible",
+    "sonarlint.pathToNodeExecutable"
+  ],
+  "gitlens.graph.layout": "editor",
+  "gitlens.autolinks": [
+    {
+      "prefix": "m1",
+      "url": null
+    }
+  ],
+  "editor.multiCursorModifier": "ctrlCmd",
+  "explorer.openEditors.sortOrder": "fullPath",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4o",
+  "java.completion.favoriteStaticMembers": [
+    "org.junit.Assert.*",
+    "org.junit.Assume.*",
+    "org.junit.jupiter.api.Assertions.*",
+    "org.junit.jupiter.api.Assumptions.*",
+    "org.junit.jupiter.api.DynamicContainer.*",
+    "org.junit.jupiter.api.DynamicTest.*",
+    "org.mockito.Mockito.*",
+    "org.mockito.ArgumentMatchers.*",
+    "org.mockito.Answers.*"
+  ],
+  "window.newWindowProfile": "Default",
+  "cmake.allowCommentsInPresetsFile": true,
+  "cmake.allowUnsupportedPresetsVersions": true,
+  "vsicons.presets.angular": true,
+  "vsicons.presets.foldersAllDefaultIcon": true,
+  "vsicons.presets.nestjs": true,
+  "vsicons.presets.jsonOfficial": true,
+  "vsicons.presets.jsOfficial": true,
+  "vsicons.presets.tsOfficial": true,
+  "python.REPL.sendToNativeREPL": true,
+  "C_Cpp.codeAnalysis.clangTidy.checks.disabled": ["*"],
+  "application.experimental.rendererProfiling": true,
+  "powershell.powerShellDefaultVersion": "winget search Microsoft.PowerShell",
+  "powershell.suppressAdditionalExeNotFoundWarning": true,
+  "terminal.integrated.defaultProfile.windows": "Windows PowerShell",
+  "jdk.jdkhome": "c:\\Users\\Mahee\\.vscode\\extensions\\OpenJDK-23",
+  "rsp-ui.enableStartServerOnActivation": [
+    {
+      "id": "redhat.vscode-community-server-connector",
+      "name": "Community Server Connector",
+      "startOnActivation": true
+    }
+  ],
+  "settingsSync.ignoredSettings": ["-sonarlint.pathToNodeExecutable"],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "sonarlint.pathToNodeExecutable": "C:\\\\Program Files\\\\NodeJS\\\\20-lts\\\\bin\\\\node.exe",
+  "security.workspace.trust.untrustedFiles": "open",
+  "go.goroot": "C:\\Program Files\\Go",
+  "go.gopath": "C:\\Users\\Mahee\\go",
+  "files.autoSave": "afterDelay",
+  "git.enableSmartCommit": true,
+  "githubPullRequests.pushBranch": "always",
+  "accessibility.verbosity.terminal": false,
+  "grunt.autoDetect": "on",
+  "mssql.connectionGroups": [
+    {
+      "name": "ROOT",
+      "id": "7A302746-98A8-4C38-B709-D6046CEF60D2"
+    }
+  ],
+  "mssql.enableRichExperiences": true,
+  "mssql.connections": []
+}
