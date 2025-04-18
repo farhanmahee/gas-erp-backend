@@ -17,7 +17,9 @@ import { LocationUpdateDto } from './dto/delivery.dto';
     origin: '*', // Configure according to your frontend domain
   },
 })
-export class DeliveryGateway implements OnGatewayConnection, OnGatewayDisconnect {
+export class DeliveryGateway
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer()
   server: Server;
 
