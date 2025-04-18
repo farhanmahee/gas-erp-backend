@@ -25,37 +25,37 @@ export class DeliveryController {
   constructor(private readonly deliveryService: DeliveryService) {}
 
   @Post()
-  async createDelivery(): Promise<Delivery> {
-    @Body(new ValidationPipe()) createDeliveryDto: CreateDeliveryDto,urceStoreId, destinationStoreId, scheduledDate } =
+  async createDelivery(
+    @Body(new ValidationPipe()) createDeliveryDto: CreateDeliveryDto,
   ): Promise<Delivery> {
-    return this.deliveryService.createDelivery(createDeliveryDto);iveryService.createDelivery(
+    return this.deliveryService.createDelivery(createDeliveryDto);
   }
-d } as any,
-  @Put(':id/location') any,
+
+  @Put(':id/location')
   async updateLocation(
     @Param('id') deliveryId: number,
     @Body(new ValidationPipe()) location: LocationUpdateDto,
   ): Promise<Delivery> {
-    return this.deliveryService.updateDeliveryLocation(deliveryId, location);  @Put(':id/location')
-  }(
-ryId: number,
-  @Post(':id/complete')ber; lng: number; speed?: number },
+    return this.deliveryService.updateDeliveryLocation(deliveryId, location);
+  }
+
+  @Post(':id/complete')
   async completeDelivery(
-    @Param('id') deliveryId: number,Service.updateDeliveryLocation(
+    @Param('id') deliveryId: number,
     @Body(new ValidationPipe()) proof: DeliveryProofDto,
-  ): Promise<Delivery> {a,
+  ): Promise<Delivery> {
     return this.deliveryService.completeDelivery(deliveryId, proof);
   }
 
-  @Get(':id')  @Post(':id/complete')
-  async getDeliveryStatus(@Param('id') deliveryId: number): Promise<Delivery> {y(
-    return this.deliveryService.getDeliveryStatus(deliveryId);Id: number,
+  @Get(':id')
+  async getDeliveryStatus(@Param('id') deliveryId: number): Promise<Delivery> {
+    return this.deliveryService.getDeliveryStatus(deliveryId);
   }
-{
-  @Get()ure?: string;
+
+  @Get()
   async listDeliveries(
-    @Query(new ValidationPipe({ transform: true })) filters: DeliveryFilterDto,;
+    @Query(new ValidationPipe({ transform: true })) filters: DeliveryFilterDto,
   ): Promise<Delivery[]> {
     return this.deliveryService.listDeliveries(filters);
-  }romise<Delivery> {
-}Service.completeDelivery(deliveryId, proof);
+  }
+}
