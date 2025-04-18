@@ -11,6 +11,7 @@ import { OrderModule } from './order/order.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { join } from 'path';
     PaymentModule,
     DeliveryModule,
     OrderModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
