@@ -9,6 +9,7 @@ import {
 import { Cylinder } from './Cylinder';
 import { User } from './User';
 import { Store } from './Store';
+import { Delivery } from './Delivery';
 
 @Entity('stock_movements')
 export class StockMovement {
@@ -50,6 +51,11 @@ export class StockMovement {
 
   @Column({ type: 'text', nullable: true })
   referenceNumber: string;
+
+  @ManyToOne(() => Delivery, (delivery) => delivery.movements, {
+    nullable: true,
+  })
+  delivery: Delivery;
 
   @CreateDateColumn()
   createdAt: Date;
