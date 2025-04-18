@@ -3,6 +3,7 @@
 ## 1. System Architecture Overview
 
 ### 1.1 Architecture Principles
+
 - **Microservices Orientation**
   - Decomposition by business capability
   - Independent deployment and scaling
@@ -27,6 +28,7 @@
   - Secure development lifecycle
 
 ### 1.2 High-Level Architecture Diagram
+
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                      Client Presentation Layer                          │
@@ -76,6 +78,7 @@
 ```
 
 ### 1.3 Component Interaction Model
+
 - **Synchronous Communication**
   - REST APIs for direct service-to-service communication
   - GraphQL for complex data queries
@@ -95,6 +98,7 @@
 ## 2. Core Services Architecture
 
 ### 2.1 Manufacturing Management Services
+
 - **Production Planning Service**
   - Schedule generation and material requirements planning
   - Work order management and resource allocation
@@ -108,6 +112,7 @@
   - Digital work instruction and material consumption tracking
 
 ### 2.2 Inventory Management Services
+
 - **Cylinder Lifecycle Service**
   - Individual cylinder tracking with RFID/barcode integration
   - Cylinder state management through its complete lifecycle
@@ -125,6 +130,7 @@
   - Maintenance history with complete cylinder traceability
 
 ### 2.3 Distribution and Logistics Services
+
 - **Order Management Service**
   - Order processing with multi-channel support
   - Customer deposit management for cylinder tracking
@@ -141,6 +147,7 @@
   - Compliance management for regulatory requirements
 
 ### 2.4 Sales and Customer Services
+
 - **Customer Relationship Service**
   - Customer onboarding with KYC and credit verification
   - Cylinder deposit tracking and reconciliation
@@ -152,6 +159,7 @@
   - Quote and proposal with cylinder requirement planning
 
 ### 2.5 Finance Services
+
 - **Accounts Receivable Service**
   - Invoice generation with cylinder deposit tracking
   - Payment processing integrated with local payment methods
@@ -163,6 +171,7 @@
   - Asset management for cylinder fleet
 
 ### 2.6 Reporting and Analytics Services
+
 - **Operational Reporting Service**
   - Daily operational KPIs for all business units
   - Exception reporting and alert management
@@ -176,6 +185,7 @@
 ## 3. Data Architecture
 
 ### 3.1 Database Architecture
+
 - **Relational Database Systems**
   - PostgreSQL for transactional data
   - Purpose: Core business data, financial records, structured data
@@ -193,6 +203,7 @@
   - Purpose: Cylinder ownership, certification, chain of custody
 
 ### 3.2 Data Integration Architecture
+
 - **ETL/ELT Pipelines**
   - Change Data Capture (CDC) for database synchronization
   - Stream processing for real-time data integration
@@ -202,6 +213,7 @@
   - Complex event processing for business rule application
 
 ### 3.3 Data Governance
+
 - **Master Data Management**
   - Centralized master data for customers, products, and locations
   - Data quality rules with industry-specific validation
@@ -213,6 +225,7 @@
 ## 4. Security Architecture
 
 ### 4.1 Authentication and Authorization
+
 - **Identity Management**
   - Multi-factor authentication for all system access
   - Role-based access control aligned with organizational structure
@@ -222,6 +235,7 @@
   - JWT token exchange for cross-service authorization
 
 ### 4.2 Network Security
+
 - **Network Segmentation**
   - Isolation of production, testing, and development environments
   - Micro-segmentation for sensitive services
@@ -231,6 +245,7 @@
   - Network policy enforcement for zero-trust architecture
 
 ### 4.3 Data Security
+
 - **Encryption Strategy**
   - Encryption at rest for all data stores
   - End-to-end encryption for sensitive workflows
@@ -242,6 +257,7 @@
 ## 5. Integration Architecture
 
 ### 5.1 Internal Integration Patterns
+
 - **API Gateway Pattern**
   - Centralized API management and monitoring
   - Version management and backward compatibility
@@ -251,6 +267,7 @@
   - Event sourcing for critical business transactions
 
 ### 5.2 External Integration Patterns
+
 - **Payment Gateway Integration**
   - Integration with bKash, Nagad and other local payment providers
   - Secure handling of payment card information
@@ -260,6 +277,7 @@
   - Compliance reporting for hazardous materials
 
 ### 5.3 IoT Integration
+
 - **Cylinder Telemetry**
   - Pressure monitoring and temperature tracking
   - Anomaly detection for safety concerns
@@ -269,6 +287,7 @@
   - Driver behavior monitoring for safety compliance
 
 ### 5.4 Mobile Integration
+
 - **Field Operations App**
   - Offline operation for delivery and collection
   - Barcode/RFID scanning for cylinder validation
@@ -280,6 +299,7 @@
 ## 6. Implementation Roadmap
 
 ### 6.1 Phased Implementation Approach
+
 - **Phase 1: Core Foundation** (3 months)
   - Infrastructure setup and core authentication
   - Master data services and basic inventory management
@@ -297,6 +317,7 @@
   - Blockchain implementation for cylinder tracking
 
 ### 6.2 Technology Selection
+
 - **Backend Services**: Java (Spring Boot) with containerization
 - **Frontend**: React with Progressive Web App capabilities
 - **Database**: PostgreSQL for transactional, MongoDB for documents
@@ -304,6 +325,7 @@
 - **Infrastructure**: Kubernetes on cloud provider of choice
 
 ### 6.3 Success Criteria
+
 - **Business Metrics**
   - 30% reduction in cylinder loss rate
   - 25% improvement in delivery efficiency

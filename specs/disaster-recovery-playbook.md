@@ -281,6 +281,7 @@ This playbook outlines procedures to recover from failures in the cylinder track
 ### 6.2 Drill Evaluation
 
 After each drill, document:
+
 - Actual recovery time vs. target
 - Procedural gaps or errors
 - Communication effectiveness
@@ -311,8 +312,8 @@ After each drill, document:
 
 | Tool | Purpose | Access Method | Responsible Team |
 |------|---------|---------------|------------------|
-| Monitoring Dashboard | Real-time system status | https://monitor.gas-erp.com | DevOps Team |
-| Incident Management System | Track recovery activities | https://incident.gas-erp.com | Operations Team |
+| Monitoring Dashboard | Real-time system status | <https://monitor.gas-erp.com> | DevOps Team |
+| Incident Management System | Track recovery activities | <https://incident.gas-erp.com> | Operations Team |
 | DR Environment | Backup production environment | VPN + special credentials | Infrastructure Team |
 | Backup Management Console | Access and restore backups | Secure admin portal | DBA Team |
 | Emergency Inventory System | Offline cylinder tracking | Standalone application | Warehouse Team |
