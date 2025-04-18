@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, Inject, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
@@ -9,6 +9,13 @@ import {
 import { Delivery } from '../entity/Delivery';
 import { User } from '../entity/User';
 import { Store } from '../entity/Store';
+import { DeliveryGateway } from './delivery.gateway';
+import {
+  CreateDeliveryDto,
+  LocationUpdateDto,
+  DeliveryProofDto,
+  DeliveryFilterDto,
+} from './dto/delivery.dto';
 
 @Injectable()
 export class DeliveryService {
@@ -19,16 +26,22 @@ export class DeliveryService {
     @InjectRepository(Delivery)
     private readonly deliveryRepository: Repository<Delivery>,
     private readonly configService: ConfigService,
+    @Inject(forwardRef(() => DeliveryGateway))
+    private readonly deliveryGateway: DeliveryGateway,
   ) {
     this.googleMapsClient = new GoogleMapsClient({});
   }
 
   async createDelivery(
-    driver: User,
-    sourceStore: Store,
-    destinationStore: Store,
-    scheduledDate: Date,
+    createDeliveryDto: CreateDeliveryDto,
   ): Promise<Delivery> {
+    const { driverId, sourceStoreId, destinationStoreId, scheduledDate } =
+      createDeliveryDto;
+
+    const driver = { id: driverId } as User;
+    const sourceStore = { store_id: sourceStoreId } as Store;
+    const destinationStore = { store_id: destinationStoreId } as Store;
+
     const route = await this.calculateRoute(sourceStore, destinationStore);
 
     const delivery = this.deliveryRepository.create({
@@ -36,20 +49,27 @@ export class DeliveryService {
       driver,
       sourceStore,
       destinationStore,
-      scheduledDate,
+      scheduledDate: new Date(scheduledDate),
       route,
       status: 'PENDING',
     });
 
-    return this.deliveryRepository.save(delivery);
+    const savedDelivery = await this.deliveryRepository.save(delivery);
+    this.deliveryGateway.broadcastDeliveryUpdate(savedDelivery.id, {
+      type: 'DELIVERY_CREATED',
+      delivery: savedDelivery,
+    });
+
+    return savedDelivery;
   }
 
   async updateDeliveryLocation(
     deliveryId: number,
-    location: { lat: number; lng: number; speed?: number },
+    location: LocationUpdateDto,
   ): Promise<Delivery> {
     const delivery = await this.deliveryRepository.findOne({
       where: { id: deliveryId },
+      relations: ['driver', 'sourceStore', 'destinationStore'],
     });
 
     if (!delivery) {
@@ -65,20 +85,22 @@ export class DeliveryService {
       delivery.status = 'IN_TRANSIT';
     }
 
-    return this.deliveryRepository.save(delivery);
+    const updatedDelivery = await this.deliveryRepository.save(delivery);
+    this.deliveryGateway.broadcastDeliveryUpdate(deliveryId, {
+      type: 'LOCATION_UPDATED',
+      delivery: updatedDelivery,
+    });
+
+    return updatedDelivery;
   }
 
   async completeDelivery(
     deliveryId: number,
-    proof: {
-      signature?: string;
-      photos?: string[];
-      receivedBy: string;
-      notes?: string;
-    },
+    proof: DeliveryProofDto,
   ): Promise<Delivery> {
     const delivery = await this.deliveryRepository.findOne({
       where: { id: deliveryId },
+      relations: ['driver', 'sourceStore', 'destinationStore'],
     });
 
     if (!delivery) {
@@ -89,7 +111,13 @@ export class DeliveryService {
     delivery.deliveredAt = new Date();
     delivery.deliveryProof = proof;
 
-    return this.deliveryRepository.save(delivery);
+    const completedDelivery = await this.deliveryRepository.save(delivery);
+    this.deliveryGateway.broadcastDeliveryUpdate(deliveryId, {
+      type: 'DELIVERY_COMPLETED',
+      delivery: completedDelivery,
+    });
+
+    return completedDelivery;
   }
 
   async getDeliveryStatus(deliveryId: number): Promise<Delivery> {
@@ -103,6 +131,47 @@ export class DeliveryService {
     }
 
     return delivery;
+  }
+
+  async listDeliveries(filters: DeliveryFilterDto): Promise<Delivery[]> {
+    const queryBuilder = this.deliveryRepository
+      .createQueryBuilder('delivery')
+      .leftJoinAndSelect('delivery.driver', 'driver')
+      .leftJoinAndSelect('delivery.sourceStore', 'sourceStore')
+      .leftJoinAndSelect('delivery.destinationStore', 'destinationStore');
+
+    if (filters.status) {
+      queryBuilder.andWhere('delivery.status = :status', {
+        status: filters.status,
+      });
+    }
+
+    if (filters.driverId) {
+      queryBuilder.andWhere('driver.id = :driverId', {
+        driverId: filters.driverId,
+      });
+    }
+
+    if (filters.storeId) {
+      queryBuilder.andWhere(
+        '(sourceStore.store_id = :storeId OR destinationStore.store_id = :storeId)',
+        { storeId: filters.storeId },
+      );
+    }
+
+    if (filters.startDate) {
+      queryBuilder.andWhere('delivery.scheduledDate >= :startDate', {
+        startDate: new Date(filters.startDate),
+      });
+    }
+
+    if (filters.endDate) {
+      queryBuilder.andWhere('delivery.scheduledDate <= :endDate', {
+        endDate: new Date(filters.endDate),
+      });
+    }
+
+    return queryBuilder.getMany();
   }
 
   private async calculateRoute(
